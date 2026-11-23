@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analisis Gerakan Pull Up - YOLOv11-Pose</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=5" />
+</head>
+<body>
+  <main class="page-wrap">
+    <div class="main-panel">
+      <!-- Kolom Kiri -->
+      <section class="left-col">
+        <div class="dropzone" id="dropzone">
+          <div id="uploadPrompt" class="upload-prompt">
+            <svg class="upload-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <polyline points="21 15 16 10 5 21" />
+            </svg>
+            <h2 class="upload-title">Upload Gambar Analisis Gerakan</h2>
+            <p class="upload-subtitle">Dukungan format: JPG, PNG (maks 100MB)</p>
+            <div class="upload-actions">
+              <button type="button" id="btnChooseFile" class="btn-primary-sm">
+                <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="17 8 12 3 7 8" />
+                  <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                <span>Pilih File</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="previewContainer" class="preview-container" hidden>
+            <img id="previewImage" alt="Preview Analisis" />
+            <div class="preview-toolbar">
+              <span id="fileNameBadge" class="file-badge">Siap dianalisis</span>
+              <button type="button" id="btnClear" class="btn-outline-xs">Ganti File</button>
+            </div>
+          </div>
+
+          <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" hidden />
+        </div>
+
+        <button type="button" id="btnAnalyze" class="btn-analyze">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <span id="btnAnalyzeText">Analisis Gerakan dengan YOLOv11-Pose</span>
+        </button>
+      </section>
+
+      <!-- Kolom Kanan -->
+      <aside class="right-col">
+        <div class="side-card">
+          <div class="side-card-header">
+            <svg class="icon-header" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+            <h3>Model Deteksi</h3>
+          </div>
+          <div class="model-item">
+            <div class="model-icon-box">
+              <svg class="icon-bolt" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </div>
+            <div class="model-meta">
+              <div class="model-name">YOLOv11-Pose</div>
+              <div class="model-desc">Model pose estimation untuk analisis gerakan pull up</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <div class="side-card-header">
+            <svg class="icon-header" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            <h3>Visualisasi Deteksi</h3>
+          </div>
+
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <div class="toggle-title">Tampilkan Keypoints</div>
+              <div class="toggle-sub">17 titik pose tubuh</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggleKeypoints" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="side-card" id="resultCard" hidden>
+          <div class="side-card-header">
+            <svg class="icon-header" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+            </svg>
+            <h3>Hasil Analisis</h3>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-box">
+              <span class="metric-label">Status Gerakan</span>
+              <strong id="resStatus" class="metric-value">-</strong>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Confidence</span>
+              <strong id="resConf" class="metric-value">0%</strong>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Keypoints Terdeteksi</span>
+              <strong id="resKpts" class="metric-value">0 / 17</strong>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script src="script.js?v=6"></script>
+</body>
+</html>

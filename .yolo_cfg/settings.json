@@ -1,0 +1,21 @@
+{
+  "settings_version": "0.0.6",
+  "datasets_dir": "D:\\project-website\\pull-up\\datasets",
+  "weights_dir": "weights",
+  "runs_dir": "runs",
+  "uuid": "c592aabe2b61a8e910eb8159e9000459e4cc05037161299c5b628f8265fc78e0",
+  "sync": true,
+  "api_key": "",
+  "openai_api_key": "",
+  "clearml": true,
+  "comet": true,
+  "dvc": true,
+  "hub": true,
+  "mlflow": true,
+  "neptune": true,
+  "raytune": true,
+  "tensorboard": false,
+  "wandb": false,
+  "vscode_msg": true,
+  "openvino_msg": true
+}
